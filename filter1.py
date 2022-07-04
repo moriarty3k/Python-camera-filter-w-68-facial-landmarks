@@ -2,15 +2,17 @@ import cv2
 import numpy as np
 import dlib
 from math import hypot
+
 # Loading Camera and Nose image and Creating mask
 cap = cv2.VideoCapture(0)
-nose_image = cv2.imread("C:/Users/proxm/Downloads/pig_nose.png")
+nose_image = cv2.imread("your_directory_to/pig_nose.png")
 _, frame = cap.read()
 rows, cols, _ = frame.shape
 nose_mask = np.zeros((rows, cols), np.uint8)
+
 # Loading Face detector
-detector = dlib.get_frontal_face_detector()#gọi hàm phát hiện gương mặt trong thư viện dlib
-predictor = dlib.shape_predictor("C:/Users/proxm\Desktop/File Code python/shape_predictor_68_face_landmarks.dat")
+detector = dlib.get_frontal_face_detector()
+predictor = dlib.shape_predictor("your_directory_to/shape_predictor_68_face_landmarks.dat")
 while True:
     _, frame = cap.read()
     nose_mask.fill(0)
@@ -18,6 +20,7 @@ while True:
     faces = detector(frame)
     for face in faces:
         landmarks = predictor(gray_frame, face)
+        
         # Nose coordinates
         top_nose = (landmarks.part(29).x, landmarks.part(29).y)
         center_nose = (landmarks.part(30).x, landmarks.part(30).y)
@@ -26,12 +29,14 @@ while True:
         nose_width = int(hypot(left_nose[0] - right_nose[0],
                            left_nose[1] - right_nose[1]) * 2)
         nose_height = int(nose_width * 1)
+        
         # New nose position
         top_left = (int(center_nose[0] - nose_width / 2),
                               int(center_nose[1] - nose_height / 2))
         bottom_right = (int(center_nose[0] + nose_width / 2),
                        int(center_nose[1] + nose_height / 2))
-                       # Adding the new nose
+        
+        # Adding the new nose
         nose_pig = cv2.resize(nose_image, (nose_width, nose_height))
         nose_pig_gray = cv2.cvtColor(nose_pig, cv2.COLOR_BGR2GRAY)
         _, nose_mask = cv2.threshold(nose_pig_gray, 25, 255, cv2.THRESH_BINARY_INV)
@@ -44,7 +49,10 @@ while True:
         cv2.imshow("Nose area", nose_area)
         cv2.imshow("Nose pig", nose_pig)
         cv2.imshow("final nose", final_nose)
-    cv2.imshow("QuangVuDepTrai", frame)
+    
+
+    #Output camera and filter
+    cv2.imshow("Screen", frame)
     key = cv2.waitKey(1)
     if key == 27:
         break
