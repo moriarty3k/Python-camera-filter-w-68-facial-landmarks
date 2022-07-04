@@ -52,7 +52,7 @@ while True:
     
 
     #Output camera and filter
-    cv2.imshow("Screen", frame)
+    cv2.imshow("Output", frame)
     key = cv2.waitKey(1)
     if key == 27:
         break
