@@ -1,5 +1,7 @@
 # Python-camera-filter-w-68-facial-landmarks
-setting required:
--Anaconda
--Python3.8
--OpenCV
+Setting required:
+- Anaconda
+- Python3.8
+- OpenCV
+
+Update when i remember something 🐒
