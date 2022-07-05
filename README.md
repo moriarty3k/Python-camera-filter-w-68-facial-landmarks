@@ -1,7 +1,7 @@
-# Python-camera-filter-w-68-facial-landmarks
+# Python camera filter with 68 facial landmarks
 Setting required:
-- Anaconda
+- Anaconda (Dont know why but we are requested to use this)
 - Python3.8
-- OpenCV
+- OpenCV & dlib
 
 Update when i remember something 🐒
